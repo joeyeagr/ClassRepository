@@ -7,6 +7,12 @@ class Spaceship {
     let name: String
     var health: Int
     var position: Int
+    
+    init (name: String, health: Int, position: Int) {
+        self.name = name
+        self.health = health
+        self.position = position
+    }
 
     func moveLeft() {
         position -= 1
@@ -25,6 +31,12 @@ class Fighter: Spaceship {
     let weapon: String
     var remainingFirePower: Int
 
+    init (weapon: String, remainingFirePower: Int, name: String, health: Int, position: Int){
+        self.weapon = weapon
+        self.remainingFirePower = remainingFirePower
+        super.init(name: name, health: health, position: position)
+    }
+    
     func fire() {
         if remainingFirePower > 0 {
             remainingFirePower -= 1
@@ -36,6 +48,11 @@ class Fighter: Spaceship {
 
 class ShieldedShip: Fighter {
     var shieldStrength: Int
+    
+    init(shieldStrength: Int, weapon: String, remainingFirePower: Int, name: String, health: Int, position: Int) {
+        self.shieldStrength = shieldStrength
+        super.init(weapon: weapon, remainingFirePower: remainingFirePower, name: name, health: health, position: position)
+    }
     
     override func wasHit() {
         if shieldStrength > 0 {
@@ -50,26 +67,33 @@ class ShieldedShip: Fighter {
  
  Then create an instance of `Spaceship` below called `falcon`. Use the memberwise initializer you just created. The ship's name should be "Falcon."
  */
-
+var falcon = Spaceship(name: "Falcon", health: 100, position: 50)
 
 /*:
  Writing initializers for subclasses can get tricky. Your initializer needs to not only set the properties declared on the subclass, but also set all of the uninitialized properties on classes that it inherits from. Go to the declaration of `Fighter` and write an initializer that takes an argument for each property on `Fighter` and for each property on `Spaceship`. Set the properties accordingly. (Hint: you can call through to a superclass' initializer with `super.init` *after* you initialize all of the properties on the subclass).
  
  Then create an instance of `Fighter` below called `destroyer`. Use the memberwise initializer you just created. The ship's name should be "Destroyer."
  */
-
+var destroyer = Fighter(weapon: "Laser", remainingFirePower: 25, name: "Destroyer", health: 100, position: 50)
 
 /*:
  Now go add an initializer to `ShieldedShip` that takes an argument for each property on `ShieldedShip`, `Fighter`, and `Spaceship`, and sets the properties accordingly. Remember that you can call through to the initializer on `Fighter` using `super.init`.
  
  Then create an instance of `ShieldedShip` below called `defender`. Use the memberwise initializer you just created. The ship's name should be "Defender."
  */
-
+var defender = ShieldedShip(shieldStrength: 30, weapon: "rockets", remainingFirePower: 30, name: "Defender", health: 100, position: 50)
 
 /*:
  Create a new instance of `Spaceship` called `sameShip` and set it equal to `falcon`. Print out the position of `sameShip` and `falcon`, then call `moveLeft()` on `sameShip` and print out the position of `sameShip` and `falcon` again. Did both positions change? Why? If both were structs instead of classes, would it be the same? Why or why not? Provide your answer in a comment or print statement below.
  */
+var sameShip = falcon
+print(sameShip.position)
+print(falcon.position)
+sameShip.moveLeft()
+print(sameShip.position)
+print(falcon.position)
 
+//when you are copying instances in classes, what you are really doing is making a "shortcut" or making another reference of the same object in memory. If it was a struct, it would create 2 unique instances of the ship
 
 /*:
  
