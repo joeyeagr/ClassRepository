@@ -32,6 +32,25 @@ class FurnitureDetailViewController: UIViewController {
     
     @IBAction func choosePhotoButtonTapped(_ sender: Any) {
         
+        
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancel)
+        
+        let chooseImage = UIAlertAction(title: <#T##String?#>, style: <#T##UIAlertActionStyle#>) { (<#UIAlertAction#>) in
+            <#code#>
+        }
+        
+        let takePicture = UIAlertAction(title: <#T##String?#>, style: <#T##UIAlertActionStyle#>) { (<#UIAlertAction#>) in
+            <#code#>
+        }
+        
+        alertController.addAction(takePicture)
+        
+        alertController.addAction(chooseImage)
     }
 
     @IBAction func actionButtonTapped(_ sender: Any) {
